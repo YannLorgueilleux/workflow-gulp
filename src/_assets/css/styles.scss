@@ -1,0 +1,11 @@
+@import "vendors/foundation-6.3.1/css/foundation";
+
+//@import "vendors/foundation-sites-develop/scss/foundation.scss";
+body {background: red}
+
+.page0--active-page0,
+.page1--active-page1,
+.page2--active-page2{
+
+  text-decoration: underline;
+}

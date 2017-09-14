@@ -1,0 +1,22 @@
+{
+  "name": "projet",
+  "version": "0.0.1",
+  "devDependencies": {
+    "del": "latest",
+    "require-dir": "latest",
+    "gulp": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-plumber": "latest",
+    "gulp-html-extend": "latest",
+    "gulp-rename": "latest",
+    "gulp-csso": "latest",
+    "gulp-scss": "latest",
+    "gulp-csscomb": "latest",
+    "gulp-cssbeautify": "latest",
+    "gulp-autoprefixer": "latest"
+  },
+  "dependencies": {
+    "browser-sync": "latest",
+    "critical": "^0.9.1"
+  }
+}
