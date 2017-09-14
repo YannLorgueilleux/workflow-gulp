@@ -1,7 +1,7 @@
 // acces à la console
-// cd C:\wamp64\www\yann-lorgueilleux.info\GULP && gulp
-// cd C:\wamp64\www\yann-lorgueilleux.info\GULP && gulp watch
-// cd C:\wamp64\www\yann-lorgueilleux.info\GULP && npm install
+// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp
+// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp watch
+// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && npm install
 
 // Requis
 var gulp = require('gulp');
