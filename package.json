@@ -4,9 +4,11 @@
   "devDependencies": {
     "del": "latest",
     "require-dir": "latest",
+    "gulp-util": "latest",
     "gulp": "latest",
     "gulp-load-plugins": "latest",
     "gulp-plumber": "latest",
+    "run-sequence": "latest",
     "gulp-html-extend": "latest",
     "gulp-rename": "latest",
     "gulp-csso": "latest",
