@@ -1,7 +1,53 @@
 @import "vendors/foundation-6.3.1/css/foundation";
 
-//@import "vendors/foundation-sites-develop/scss/foundation.scss";
-body {background: red}
+
+
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,900');
+
+
+
+.titre-principal {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 6.5rem;
+  color: #0a0a0a;
+  font-weight: 200;
+}
+
+
+.bg-vid {
+  position:absolute;
+  top:0;
+  z-index: -1;
+
+  min-height: 100vh;
+  min-width:100vw;
+
+
+  background-image: url('/_assets/img/P1090708.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
+.bg-vid__calc-sup {
+  position:absolute;
+  display:block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6
+}
+
+
+
+.degrad--bleu{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+0,53cbf1+40,ff07e2+100 */
+  background: #87e0fd; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #87e0fd 0%, #53cbf1 40%, #ff07e2 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #87e0fd 0%,#53cbf1 40%,#ff07e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#ff07e2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
 
 .page0--active-page0,
 .page1--active-page1,

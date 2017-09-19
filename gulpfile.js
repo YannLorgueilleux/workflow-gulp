@@ -44,9 +44,10 @@ gulp.task('clean', function () {
 
 
 // Taches sur CSS
-// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp scss
-gulp.task('scss', function () {
- console.log('BUIL ===================== TACHES : SCSS =======================');
+
+// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp compil-scss
+gulp.task('prepare-css', function () {
+ console.log('BUIL ===================== TACHES : prepare-css =======================');
   return gulp.src('src/_assets/css/styles.scss')
     .pipe(plugins.plumber())
     .pipe(plugins.scss())
@@ -63,6 +64,8 @@ gulp.task('scss', function () {
     }))
     ;
 });
+
+
 
 
 // INSERTION de blocs  HTML
@@ -89,6 +92,23 @@ gulp.task('inserthtml', function () {
     }))
 });
 
+
+// Minification des IMAGES
+//cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp minImages
+const imagemin = require('gulp-imagemin');
+gulp.task('minImages', () =>
+   gulp.src('src/_assets/img/**/*.+(png|jpg|gif|svg)')
+       .pipe(imagemin([
+          imagemin.gifsicle({interlaced: true}),
+          imagemin.jpegtran({progressive: true}),
+          imagemin.optipng({optimizationLevel: 5}),
+          imagemin.svgo({plugins: [{removeViewBox: true}]})
+      ]))
+       .pipe(gulp.dest('tmp/_assets/img'))
+);
+
+
+
 // PROD==========================================================================
 
 
@@ -99,9 +119,9 @@ gulp.task('minifycss', function () {
   return gulp.src('tmp/_assets/css/styles.css')
     .pipe(plugins.plumber())
     .pipe(plugins.csso())
-    .pipe(plugins.rename({
-      suffix: '.min'
-    }))
+    //.pipe(plugins.rename({
+    //  suffix: '.min'
+    //}))
     .pipe(gulp.dest('dist/_assets/css/'));
 });
 
@@ -124,8 +144,8 @@ gulp.task('critical', function () {
           base: 'tmp/',
           inline: true,
           minify:true,
-          extract: true,
-          css: ['dist/_assets/css/styles.min.css']}))
+          extract: false,
+          css: ['dist/_assets/css/styles.css']}))
         .on('error', function(err) {
           gutil.log(gutil.colors.red(err.message));
         })
@@ -138,15 +158,36 @@ gulp.task('critical', function () {
         ;
 });
 
+
+// Tâche cleanHtml
+//remove unneeded whitespaces, line-breaks, comments, etc from the HTML.
+//
+// cd C:\wamp64\www\yann-lorgueilleux.info\workflow-gulp && gulp cleanhtml
+var cleanhtml = require('gulp-cleanhtml');
+
+gulp.task('cleanhtml', function(){
+  gulp.src('tmp/**/*.html')
+    .pipe(cleanhtml())
+    .pipe(gulp.dest('dist'));
+});
+
+// Tâche duppliques les IMAGES
+gulp.task('duplicimages', function(){
+  gulp.src('tmp/_assets/img')
+    .pipe(gulp.dest('dist/_assets/img'));
+});
+
+
 // ================================================
 
 
 // lancements automatiques
 gulp.task('watch', ['browserSync' ] , function(){
-  gulp.watch('src/_assets/css/**/*.scss', ['scss']);
+  gulp.watch('src/_assets/css/**/*.scss', ['prepare-css']);
   // Other watchers
   gulp.watch('src/{,_includes/}*.html',{cwd:'./'}, ['inserthtml'] , browserSync.reload);
-  gulp.watch('src/js/**/*.js', browserSync.reload);
+  gulp.watch('src/_assets/{,img/}*',{cwd:'./'}, ['minImages'] , browserSync.reload);
+//  gulp.watch('src/js/**/*.js', browserSync.reload);
 
   gulp.watch('tmp/**/*.html' , browserSync.reload);
 })
@@ -178,7 +219,7 @@ gulp.task('browserSyncProd', function() {
 
 
 gulp.task('build', function(callback) {
-  runSequence( ['scss', 'inserthtml'],
+  runSequence( ['prepare-css', 'inserthtml' , 'minImages'],
 
               callback);
 });
@@ -193,7 +234,8 @@ gulp.task('build', function(callback) {
 gulp.task('prod', function(callback) {
   runSequence('build',
               'minifycss',
-              ['critical'],
+              ['critical' ,'duplicimages'],
+              'cleanhtml',
               'browserSyncProd',
               callback);
 });

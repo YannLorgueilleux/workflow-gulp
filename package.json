@@ -2,20 +2,26 @@
   "name": "projet",
   "version": "0.0.1",
   "devDependencies": {
+    "event-stream": "latest",
     "del": "latest",
     "require-dir": "latest",
     "gulp-util": "latest",
+    "merge-stream": "latest",
     "gulp": "latest",
     "gulp-load-plugins": "latest",
     "gulp-plumber": "latest",
     "run-sequence": "latest",
+    "gulp-htmlbuild": "latest",
     "gulp-html-extend": "latest",
     "gulp-rename": "latest",
     "gulp-csso": "latest",
+    "gulp-concat": "latest",
     "gulp-scss": "latest",
     "gulp-csscomb": "latest",
     "gulp-cssbeautify": "latest",
-    "gulp-autoprefixer": "latest"
+    "gulp-autoprefixer": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-cleanhtml": "latest"
   },
   "dependencies": {
     "browser-sync": "latest",
