@@ -50,7 +50,7 @@ gulp.task('prepare-css', function () {
  console.log('BUIL ===================== TACHES : prepare-css =======================');
   return gulp.src('src/_assets/css/styles.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.scss())
+    .pipe(plugins.sass().on('error', plugins.sass.logError))
 
     //.pipe(plugins.csscomb())
     //.pipe(plugins.cssbeautify({indent: '  '}))
@@ -173,7 +173,7 @@ gulp.task('cleanhtml', function(){
 
 // Tâche duppliques les IMAGES
 gulp.task('duplicimages', function(){
-  gulp.src('tmp/_assets/img')
+  gulp.src(['tmp/_assets/img/**/*'])
     .pipe(gulp.dest('dist/_assets/img'));
 });
 
@@ -232,8 +232,7 @@ gulp.task('build', function(callback) {
 
 
 gulp.task('prod', function(callback) {
-  runSequence('build',
-              'minifycss',
+  runSequence('minifycss',
               ['critical' ,'duplicimages'],
               'cleanhtml',
               'browserSyncProd',
